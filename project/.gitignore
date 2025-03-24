@@ -1,0 +1,29 @@
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+
+# Archivos de distribución y empaquetado
+build/
+dist/
+*.egg-info/
+
+# Checkpoints de Jupyter Notebook
+.ipynb_checkpoints/
+
+# Archivos de configuración local
+.env
+*.env
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Configuración de IDEs y editores
+.vscode/
+.idea/
