@@ -16,7 +16,7 @@ Máster en Deep Learning UPM | Universidad Politécnica de Madrid | Curso 2024-2
 
 ## Español
 
-Este repositorio contiene el material para el curso **Operalización de Machine Learning (MLOps)**, del Máster en Deep Learning UPM por la Universidad Politécnica de Madrid (Curso 2024-25).
+Este repositorio contiene el material para el curso **Operacionalización de Machine Learning (MLOps)**, del Máster en Deep Learning UPM por la Universidad Politécnica de Madrid (Curso 2024-25).
 
 ### Índice
 - [Contenido del repositorio](#contenido-del-repositorio)
@@ -29,7 +29,8 @@ Este repositorio contiene el material para el curso **Operalización de Machine 
 ### Contenido de la asignatura
 | **Parte** | **Título**                         | **Contenido**                                                              | **Diapositivas**                                                                                                                                                                                         |
 |-----------|-------------------------------------------------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| **I**     | Introducción a MLOps                       | MLOps; Workflows; Infraestructura;| [Diapositivas](./slides/01_introduction.pdf)  
+| **I**     | Introducción a MLOps                       | MLOps; Workflows; Infraestructura;| [Diapositivas](./slides/MLOps-Tema1-IntroduccionMLOps.pdf)                                            |
+| **2**    | Dev Envirnoment and Git                       | Development; Inference; Version control with Git | [Diapositivas](./slides/MLOps-Tema2-EntornoDesarrolloYGit.pdf) |  
 
 
 [Volver al índice](#índice)  | [Inicio](#)
@@ -49,9 +50,9 @@ This repository contains the material for the course **"Machine Learning Operati
 - `slides`: Contains the course slides.
 
 ### Course Content
-| **Part** | **Title**                           | **Content**                                                                | **Slides**                                                                                                                                                                                       |
+| **Theme** | **Title**                           | **Content**                                                                | **Slides**                                                                                                                                                                                       |
 |----------|-------------------------------------|----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| **I**    | Introduction to MLOps                       | MLOps; Workflows; Infraestructure | [Slides](./slides/01_introduction.pdf)                                            |
-
+| **1**    | Introduction to MLOps                       | MLOps; Workflows; Infraestructure | [Slides](./slides/MLOps-Tema1-IntroduccionMLOps.pdf)                                            |
+| **2**    | Dev Environment and Git                       | Development; Inference; Version control with Git | [Slides](./slides/MLOps-Tema2-EntornoDesarrolloYGit.pdf) |
 
 [Back to Index](#index)   | [Top](#)
