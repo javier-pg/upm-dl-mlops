@@ -5,9 +5,12 @@ test_inference_api.py: Script de tests para la API de inferencia de precios de c
 Utiliza TestClient de FastAPI para enviar peticiones y validar respuestas, 
 incluyendo casos de éxito, errores de validación y peticiones con campos faltantes.
 """
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from fastapi.testclient import TestClient
-from inference_api import app  # Asegúrate de que en inference_api.py la variable 'app' es la instancia FastAPI
+from src.inference_api import app  # Asegúrate de que en inference_api.py la variable 'app' es la instancia FastAPI
 
 # Crear el cliente de test pasándole la aplicación FastAPI
 client = TestClient(app)
