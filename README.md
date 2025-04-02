@@ -1,4 +1,4 @@
-# Operalización de Machine Learning (MLOps)
+# Operacionalización de Machine Learning (MLOps)
 Máster en Deep Learning UPM | Universidad Politécnica de Madrid | Curso 2024-25
 
 <img align="left" src="./imgs/master_dl_logo.png" alt="Logo Master" width="200">
