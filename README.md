@@ -54,5 +54,10 @@ This repository contains the material for the course **"Machine Learning Operati
 |----------|-------------------------------------|----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | **1**    | Introduction to MLOps                       | MLOps; Workflows; Infraestructure | [Slides](./slides/MLOps-Tema1-IntroduccionMLOps.pdf)                                            |
 | **2**    | Dev Environment and Git                       | Development; Inference; Version control with Git | [Slides](./slides/MLOps-Tema2-EntornoDesarrolloYGit.pdf) |
+| **4**    | Experiment tracking with W&B        |         Overview, runs, workspace, projects                | [Slides](./slides/part4.pdf) | 
+| **5**    | Hyperparameter tuning with W&B sweeps        |         Sweep overivew, search space, agent                | [Slides](./slides/part5.pdf) |
 
 [Back to Index](#index)   | [Top](#)
+
+
+
