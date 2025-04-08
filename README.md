@@ -31,6 +31,9 @@ Este repositorio contiene el material para el curso **Operacionalización de Mac
 |-----------|-------------------------------------------------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | **I**     | Introducción a MLOps                       | MLOps; Workflows; Infraestructura;| [Diapositivas](./slides/MLOps-Tema1-IntroduccionMLOps.pdf)                                            |
 | **2**    | Dev Envirnoment and Git                       | Development; Inference; Version control with Git | [Diapositivas](./slides/MLOps-Tema2-EntornoDesarrolloYGit.pdf) |  
+| **3**    | Empaquetamiento y Contenedorización                       | Empaquetamiento; Docker; Docker-Compose; Azure Apps | [Diapositivas](./slides/MLOps-Tema3-EmpaquetamientoYContenedorización.pdf) |
+| **4**    | Seguimiento de experimentos con W&B        |         Visión general, ejecuciones, espacio de trabajo, proyectos                | [Diapositivas](./slides/part4.pdf) | 
+| **5**    | Ajuste de hiperparámetros con barridos de W&B        |         Visión general de barridos, espacio de búsqueda, agente                | [Diapositivas](./slides/part5.pdf) |
 
 
 [Volver al índice](#índice)  | [Inicio](#)
@@ -54,6 +57,7 @@ This repository contains the material for the course **"Machine Learning Operati
 |----------|-------------------------------------|----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | **1**    | Introduction to MLOps                       | MLOps; Workflows; Infraestructure | [Slides](./slides/MLOps-Tema1-IntroduccionMLOps.pdf)                                            |
 | **2**    | Dev Environment and Git                       | Development; Inference; Version control with Git | [Slides](./slides/MLOps-Tema2-EntornoDesarrolloYGit.pdf) |
+| **3**    | Packaging and Containerization                       | Packaging; Docker; Docker-Compose; Azure Apps | [Slides](./slides/MLOps-Tema3-EmpaquetamientoYContenedorización.pdf) |
 | **4**    | Experiment tracking with W&B        |         Overview, runs, workspace, projects                | [Slides](./slides/part4.pdf) | 
 | **5**    | Hyperparameter tuning with W&B sweeps        |         Sweep overivew, search space, agent                | [Slides](./slides/part5.pdf) |
 

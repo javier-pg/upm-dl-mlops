@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  api:
+    image: house-price-mlops:latest  # Si ya tienes una imagen, puedes usarla directamente
+    build: # o se puede construir desde el Dockerfile
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000" # exposición en el host
+    volumes:
+      - ./api/artifacts:/app/artifacts
+    environment:
+      - API_PORT=8000
+  test:
+    image: test-house-price-mlops 
+    build:
+      context: ./test
+      dockerfile: Dockerfile  
+    depends_on:
+      - api
+    environment:
+      - API_HOST=api
+      - API_PORT=8000
+  web:
+    image: web-house-price-mlops    
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile 
+    ports:
+      - "8080:8080"
+    depends_on:
+      - api
+    environment:
+      - WEB_APP_PORT=8080
+      - API_HOST=api
+      - API_PORT=8000

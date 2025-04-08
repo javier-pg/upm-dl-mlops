@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario - Precio de Casas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 3rem auto;
+            /* Añadimos margen vertical para que no se corte arriba */
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        form input[type="text"],
+        form input[type="number"],
+        form select {
+            width: 100%;
+            padding: 0.6rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        form input[type="submit"] {
+            background-color: #74ebd5;
+            border: none;
+            color: #fff;
+            padding: 0.8rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        
+        form input[type="submit"]:hover {
+            background-color: #66d1c3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Ingresa los datos de la casa</h1>
+        <form action="/predict_price" method="POST">
+            <label>Área (en m²):</label>
+            <input type="text" name="area" required>
+
+            <label>Número de dormitorios:</label>
+            <input type="number" name="bedrooms" required>
+
+            <label>Número de baños:</label>
+            <input type="number" name="bathrooms" required>
+
+            <label>Número de plantas:</label>
+            <input type="number" name="stories" required>
+
+            <label>¿Tiene acceso a vía principal?</label>
+            <select name="mainroad">
+        <option value="yes">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+            <label>¿Tiene habitación de invitados?</label>
+            <select name="guestroom">
+        <option value="yes">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+            <label>¿Tiene sótano?</label>
+            <select name="basement">
+        <option value="yes">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+            <label>¿Tiene calefacción con agua caliente?</label>
+            <select name="hotwaterheating">
+        <option value="yes">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+            <label>¿Tiene aire acondicionado?</label>
+            <select name="airconditioning">
+        <option value="yes">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+            <label>Número de espacios de estacionamiento:</label>
+            <input type="number" name="parking" required>
+
+            <label>¿Está ubicada en una zona preferencial?</label>
+            <select name="prefarea">
+        <option value="yes">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+            <label>Estado de la amueblación:</label>
+            <select name="furnishingstatus">
+        <option value="furnished">Amueblada</option>
+        <option value="semi-furnished">Semi-amueblada</option>
+        <option value="unfurnished">Sin amueblar</option>
+      </select>
+
+            <input type="submit" value="Predecir Precio">
+        </form>
+    </div>
+</body>
+
+</html>
