@@ -1,0 +1,1 @@
+{"columns": ["metric_name", "metric_value", "model_name"], "data": [["mae", 812047.36, "LinearRegression"], ["mse", 1339596296768.83, "LinearRegression"], ["r2_score", 0.71, "LinearRegression"]]}

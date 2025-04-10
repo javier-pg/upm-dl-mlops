@@ -1,0 +1,86 @@
+2025-04-03 19:13:18,494 INFO    MainThread:32602 [wandb_init.py:setup_run_log_directory():647] Logging user logs to /home/victor/Github/upm-dl-mlops/project/notebooks/wandb/run-20250403_191318-wx4tywoz/logs/debug.log
+2025-04-03 19:13:18,495 INFO    MainThread:32602 [wandb_init.py:setup_run_log_directory():648] Logging internal logs to /home/victor/Github/upm-dl-mlops/project/notebooks/wandb/run-20250403_191318-wx4tywoz/logs/debug-internal.log
+2025-04-03 19:13:18,495 INFO    MainThread:32602 [wandb_init.py:init():761] calling init triggers
+2025-04-03 19:13:18,495 INFO    MainThread:32602 [wandb_init.py:init():766] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-04-03 19:13:18,495 INFO    MainThread:32602 [wandb_init.py:init():784] starting backend
+2025-04-03 19:13:18,495 INFO    MainThread:32602 [wandb_init.py:init():788] sending inform_init request
+2025-04-03 19:13:18,496 INFO    MainThread:32602 [backend.py:_multiprocessing_setup():97] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-04-03 19:13:18,497 INFO    MainThread:32602 [wandb_init.py:init():803] backend started and connected
+2025-04-03 19:13:18,504 INFO    MainThread:32602 [wandb_run.py:_label_probe_notebook():1204] probe notebook
+2025-04-03 19:13:18,506 INFO    MainThread:32602 [wandb_init.py:init():896] updated telemetry
+2025-04-03 19:13:18,513 INFO    MainThread:32602 [wandb_init.py:init():920] communicating run to backend with 90.0 second timeout
+2025-04-03 19:13:20,020 WARNING MsgRouterThr:32602 [router.py:message_loop():77] message_loop has been closed
+Traceback (most recent call last):
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 258, in _read_packet_bytes
+    data = self._sock.recv(self._bufsize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BlockingIOError: [Errno 11] Resource temporarily unavailable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/interface/router_sock.py", line 28, in _read_message
+    resp = self._sock_client.read_server_response(timeout=1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 285, in read_server_response
+    data = self._read_packet_bytes(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 262, in _read_packet_bytes
+    raise SockClientClosedError from e
+wandb.sdk.lib.sock_client.SockClientClosedError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/interface/router.py", line 70, in message_loop
+    msg = self._read_message()
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/interface/router_sock.py", line 30, in _read_message
+    raise MessageRouterClosedError from e
+wandb.sdk.interface.router.MessageRouterClosedError
+2025-04-03 19:13:20,023 INFO    MsgRouterThr:32602 [mailbox.py:close():115] Closing mailbox, abandoning 0 handles.
+2025-04-03 19:13:54,804 WARNING MainThread:32602 [wandb_init.py:init():1475] interrupted
+Traceback (most recent call last):
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 1471, in init
+    return wi.init(run_settings, run_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 946, in init
+    result = wait_with_progress(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/mailbox/wait_with_progress.py", line 23, in wait_with_progress
+    return wait_all_with_progress(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/mailbox/wait_with_progress.py", line 86, in wait_all_with_progress
+    return asyncio_compat.run(progress_loop_with_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/lib/asyncio_compat.py", line 30, in run
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/concurrent/futures/_base.py", line 451, in result
+    self._condition.wait(timeout)
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/threading.py", line 327, in wait
+    waiter.acquire()
+KeyboardInterrupt
+2025-04-03 19:13:54,806 WARNING MsgRouterThr:32602 [router.py:message_loop():77] message_loop has been closed
+Traceback (most recent call last):
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/interface/router_sock.py", line 28, in _read_message
+    resp = self._sock_client.read_server_response(timeout=1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 285, in read_server_response
+    data = self._read_packet_bytes(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 270, in _read_packet_bytes
+    raise SockClientClosedError
+wandb.sdk.lib.sock_client.SockClientClosedError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/interface/router.py", line 70, in message_loop
+    msg = self._read_message()
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/victor/.pyenv/versions/3.11.10/lib/python3.11/site-packages/wandb/sdk/interface/router_sock.py", line 30, in _read_message
+    raise MessageRouterClosedError from e
+wandb.sdk.interface.router.MessageRouterClosedError
+2025-04-03 19:13:54,814 INFO    MsgRouterThr:32602 [mailbox.py:close():115] Closing mailbox, abandoning 1 handles.

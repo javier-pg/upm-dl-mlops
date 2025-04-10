@@ -1,0 +1,31 @@
+{
+  "os":  "Linux-6.8.0-57-generic-x86_64-with-glibc2.35",
+  "python":  "CPython 3.11.10",
+  "startedAt":  "2025-04-03T17:14:28.358945Z",
+  "program":  "/home/victor/Github/upm-dl-mlops/project/notebooks/modeling.ipynb",
+  "codePath":  "project/notebooks/modeling.ipynb",
+  "git":  {
+    "remote":  "git@github.com:javier-pg/upm-dl-mlops.git",
+    "commit":  "23103e752d3c30ebe91e58b61e4c9b3e24254e75"
+  },
+  "email":  "victor.rfernandez@upm.es",
+  "root":  "/home/victor/Github/upm-dl-mlops/project/notebooks",
+  "host":  "victor-HP-ProBook-440-G8",
+  "executable":  "/home/victor/.pyenv/versions/3.11.10/bin/python",
+  "codePathLocal":  "modeling.ipynb",
+  "cpu_count":  4,
+  "cpu_count_logical":  8,
+  "disk":  {
+    "/":  {
+      "total":  "263086084096",
+      "used":  "233244901376"
+    }
+  },
+  "memory":  {
+    "total":  "16438177792"
+  },
+  "cpu":  {
+    "count":  4,
+    "countLogical":  8
+  }
+}

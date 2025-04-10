@@ -1,0 +1,6 @@
+{"time":"2025-04-03T19:13:18.497042797+02:00","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/home/victor/Github/upm-dl-mlops/project/notebooks/wandb/run-20250403_191318-wx4tywoz/logs/debug-core.log"}
+{"time":"2025-04-03T19:13:18.601595817+02:00","level":"INFO","msg":"created new stream","id":"wx4tywoz"}
+{"time":"2025-04-03T19:13:18.601629383+02:00","level":"INFO","msg":"stream: started","id":"wx4tywoz"}
+{"time":"2025-04-03T19:13:18.601645888+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"wx4tywoz"}
+{"time":"2025-04-03T19:13:18.601651552+02:00","level":"INFO","msg":"sender: started","stream_id":"wx4tywoz"}
+{"time":"2025-04-03T19:13:18.601701544+02:00","level":"INFO","msg":"handler: started","stream_id":"wx4tywoz"}
