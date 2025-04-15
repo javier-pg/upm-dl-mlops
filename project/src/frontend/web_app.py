@@ -62,4 +62,5 @@ def predict_price():
         return "Error en la API. No se pudo obtener la predicción."
 
 if __name__ == "__main__":
+    # Ejecutar la aplicación web en el puerto especificado
     app.run(host="0.0.0.0", port=WEB_APP_PORT, debug=True)
