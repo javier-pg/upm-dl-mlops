@@ -43,7 +43,7 @@ jobs:
       - name: Create .env file con los secretos
         run: |
           echo "WANDB_API_KEY=${{ secrets.WANDB_API_KEY }}" >> ./project/src/.env
-          echo "WANDB_ARTIFACT_PATH=${{ secrets.WANDB_ARTIFACT_PATH }}" >> ./project/src/.env
+          echo "WANDB_ARTIFACT_PATH=${{ vars.WANDB_ARTIFACT_PATH }}" >> ./project/src/.env
       - name: Run tests
         run: |
           docker-compose -f ./project/src/docker-compose.yml --env-file ./project/src/.env up --abort-on-container-exit test
@@ -63,11 +63,11 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Docker login to ACR
-        run: az acr login --name ${{ secrets.AZURE_ACR_NAME }}
+        run: az acr login --name ${{ vars.AZURE_ACR_NAME }}
       - name: Build & push API image
         run: |
-          docker build -t ${{ secrets.AZURE_ACR_NAME }}.azurecr.io/house-price-mlops:ci ./project/src/api
-          docker push ${{ secrets.AZURE_ACR_NAME }}.azurecr.io/house-price-mlops:ci
+          docker build -t ${{ vars.AZURE_ACR_NAME }}.azurecr.io/house-price-mlops:ci ./project/src/api
+          docker push ${{ vars.AZURE_ACR_NAME }}.azurecr.io/house-price-mlops:ci
 
   build-web:
     runs-on: ubuntu-latest
@@ -80,8 +80,8 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Docker login to ACR
-        run: az acr login --name ${{ secrets.AZURE_ACR_NAME }}
+        run: az acr login --name ${{ vars.AZURE_ACR_NAME }}
       - name: Build & push Web image
         run: |
-          docker build -t ${{ secrets.AZURE_ACR_NAME }}.azurecr.io/web-house-price-mlops:ci ./project/src/frontend
-          docker push ${{ secrets.AZURE_ACR_NAME }}.azurecr.io/web-house-price-mlops:ci
+          docker build -t ${{ vars.AZURE_ACR_NAME }}.azurecr.io/web-house-price-mlops:ci ./project/src/frontend
+          docker push ${{ vars.AZURE_ACR_NAME }}.azurecr.io/web-house-price-mlops:ci
