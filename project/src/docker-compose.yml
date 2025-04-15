@@ -9,18 +9,19 @@ services:
       - "8000:8000" # exposición en el host
     environment:
       - API_PORT=8000
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8000/docs || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
+    ealthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
   test:
     image: test-house-price-mlops 
     build:
       context: ./test
       dockerfile: Dockerfile  
     depends_on:
-      - api
+      api:
+        condition: service_healthy
     environment:
       - API_HOST=api
       - API_PORT=8000

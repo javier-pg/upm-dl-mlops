@@ -18,30 +18,45 @@ API_PORT = int(os.environ.get("API_PORT", 8000))
 API_URL = f"http://{API_HOST}:{API_PORT}"
 
 
-def check_server():
-    """Verifica que el servidor esté corriendo antes de ejecutar los tests, 
-    intentando hasta 3 veces con 5s de espera entre cada intento.
-    """
-    max_retries = 3
-    sleep_time = 5
+import time
+import requests
 
-    for intento in range(max_retries):
+API_URL = "http://localhost:8000"  # Asegurate de definir esto fuera si no está
+
+def check_server(api_url=API_URL, retries=3, delay=5, timeout=2):
+    """
+    Verifica que el servidor esté disponible antes de ejecutar los tests.
+
+    Intenta conectarse a la ruta /docs del servidor especificado. Reintenta hasta
+    'retries' veces con una espera de 'delay' segundos entre intentos.
+
+    Args:
+        api_url (str): URL base de la API a verificar.
+        retries (int): Número máximo de intentos.
+        delay (int): Segundos de espera entre intentos.
+        timeout (int): Tiempo máximo de espera por intento de conexión (segundos).
+
+    Raises:
+        RuntimeError: Si el servidor no responde correctamente después de todos los intentos.
+    """
+    print(f"🔍 Verificando disponibilidad del servidor en {api_url}...")
+
+    for attempt in range(1, retries + 1):
         try:
-            r = requests.get(f"{API_URL}/docs", timeout=2)
-            if r.status_code == 200:
+            response = requests.get(f"{api_url}/docs", timeout=timeout)
+            if response.status_code == 200:
                 print("✅ El servidor está disponible.")
                 return
             else:
-                print(f"⚠️ El servidor respondió con status {r.status_code}, reintentando...")
-        except Exception as e:
-            print(f"⚠️ Error de conexión: {e}, reintentando...")
+                print(f"⚠️ Respuesta inesperada (status {response.status_code}), intento {attempt}/{retries}")
+        except requests.RequestException as err:
+            print(f"⚠️ Error al conectar: {err}, intento {attempt}/{retries}")
 
-        # Si no ha salido con éxito, esperamos 5 segundos antes de reintentar
-        if intento < max_retries - 1:
-            time.sleep(sleep_time)
+        if attempt < retries:
+            time.sleep(delay)
 
-    # Si tras 3 intentos sigue sin responder correctamente, lanzamos excepción
-    raise RuntimeError("🚨 El servidor no respondió correctamente tras 3 intentos.")
+    raise RuntimeError(f"🚨 El servidor no respondió correctamente tras {retries} intentos.")
+
 
 def test_predict_success():
     """Test para una petición exitosa de predicción."""
