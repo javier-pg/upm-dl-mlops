@@ -12,8 +12,10 @@ from pydantic import BaseModel
 import pandas as pd
 import joblib
 import os
+import wandb
 
 API_PORT = int(os.environ.get("API_PORT", 8000))
+
 
 # Definir el esquema de datos para la petición de inferencia
 class HouseData(BaseModel):
@@ -48,10 +50,24 @@ def transform_new_data_ohe(df, columns, encoders):
         
     return df_transformed
 
+
+
+
+# Inicializar wandb (no inicia un run de tracking)
+api = wandb.Api()
+
+# Definir el nombre del artefacto y usuario/proyecto
+artifact_path = os.getenv("WANDB_ARTIFACT_PATH", "javierpg-universidad-de-murcia/house-price-regression/house_price_model:v0")
+
+# Descargar artefacto
+artifact = api.artifact(artifact_path, type="model")
+artifact_dir = artifact.download()
+
 # Cargar artefactos guardados
-model = joblib.load("artifacts/model.pkl")
-encoders = joblib.load("artifacts/encoders.pkl")
-scaler = joblib.load("artifacts/scaler.pkl")
+model = joblib.load(os.path.join(artifact_dir, "model.pkl"))
+encoders = joblib.load(os.path.join(artifact_dir, "encoders.pkl"))
+scaler = joblib.load(os.path.join(artifact_dir, "scaler.pkl"))
+
 
 # Columnas categóricas y numéricas (según el preprocesamiento)
 categorical_columns = [

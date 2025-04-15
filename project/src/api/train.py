@@ -14,9 +14,12 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
 import joblib
+import wandb
 
-# Crear carpeta para guardar artefactos si no existe
-os.makedirs("artifacts", exist_ok=True)
+wandb.init(
+    project=os.getenv("WANDB_PROJECT", "house-price-regression"),
+    name=os.getenv("WANDB_RUN_NAME", "baseline"),
+    config={"model": "LinearRegression"})
 
 # Función para ajustar y transformar variables categóricas
 def fit_transform_ohe(df, columns, drop='first'):
@@ -89,8 +92,22 @@ print("MSE:", mse)
 print("RMSE:", rmse)
 print("R²:", r2)
 
-# Guardar modelo, encoders y scaler en la carpeta artifacts
+
+# Crear y registrar artefactos con wandb
+artifact = wandb.Artifact("house_price_model", type="model")
+
+# Guardar archivos temporalmente
 joblib.dump(model, "artifacts/model.pkl")
 joblib.dump(encoders, "artifacts/encoders.pkl")
 joblib.dump(scaler, "artifacts/scaler.pkl")
+
+# Añadir archivos al artefacto
+artifact.add_file("artifacts/model.pkl")
+artifact.add_file("artifacts/encoders.pkl")
+artifact.add_file("artifacts/scaler.pkl")
+
+# Registrar el artefacto
+wandb.log_artifact(artifact)
+
+print("Artefactos registrados en Weights & Biases.")
 print("Artefactos guardados en la carpeta artifacts.")
