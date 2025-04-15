@@ -21,7 +21,11 @@ API_URL = f"http://{API_HOST}:{API_PORT}"
 import time
 import requests
 
-API_URL = "http://localhost:8000"  # Asegurate de definir esto fuera si no está
+# Configuración de la URL base de la API
+# Se puede configurar a través de variables de entorno (Docker) o por defecto localhost:8000 (se ejecuta sin Docker)
+API_HOST = os.environ.get("API_HOST", "localhost")
+API_PORT = os.environ.get("API_PORT", "8000")
+API_URL = f"http://{API_HOST}:{API_PORT}"
 
 def check_server(api_url=API_URL, retries=3, delay=5, timeout=2):
     """
