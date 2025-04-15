@@ -41,7 +41,10 @@ jobs:
           chmod +x /usr/local/bin/docker-compose
           docker-compose version
       - name: Run tests
-        run: docker-compose -f ./project/src/docker-compose.yml up --abort-on-container-exit test
+        run: |
+          export WANDB_API_KEY=${{ secrets.WANDB_API_KEY }}
+          export WANDB_ARTIFACT_PATH=${{ secrets.WANDB_ARTIFACT_PATH }}
+          docker-compose -f ./project/src/docker-compose.yml up --abort-on-container-exit test
 
   build-api:
     runs-on: ubuntu-latest

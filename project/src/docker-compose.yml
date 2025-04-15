@@ -9,6 +9,8 @@ services:
       - "8000:8000" # exposición en el host
     environment:
       - API_PORT=8000
+      - WANDB_API_KEY=${WANDB_API_KEY}
+      - WANDB_ARTIFACT_PATH=${WANDB_ARTIFACT_PATH}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
       interval: 5s
