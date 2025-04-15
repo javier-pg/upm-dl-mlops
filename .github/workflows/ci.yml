@@ -24,6 +24,11 @@ jobs:
               - 'project/src/api/**'
             web:
               - 'project/src/frontend/**'
+      
+      - name: Debug change detection
+        run: |
+          echo "API changed? ${{ steps.filter.outputs.api }}"
+          echo "WEB changed? ${{ steps.filter.outputs.web }}"
 
   test:
     runs-on: ubuntu-latest
