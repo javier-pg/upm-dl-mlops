@@ -41,7 +41,7 @@ jobs:
           chmod +x /usr/local/bin/docker-compose
           docker-compose version
       - name: Run tests
-        run: docker-compose -f docker-compose.yml up --abort-on-container-exit test
+        run: docker-compose -f ./project/src/docker-compose.yml up --abort-on-container-exit test
 
   build-api:
     runs-on: ubuntu-latest
