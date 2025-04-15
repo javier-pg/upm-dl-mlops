@@ -108,4 +108,5 @@ async def predict_house(data: HouseData):
 
 # Ejecutar la API (ejecutar este script directamente)
 if __name__ == "__main__":
+    # Ejecutar la API en el puerto especificado
     uvicorn.run(app, host="0.0.0.0", port=API_PORT)
