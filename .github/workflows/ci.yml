@@ -40,13 +40,11 @@ jobs:
           curl -SL https://github.com/docker/compose/releases/download/v2.24.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
           chmod +x /usr/local/bin/docker-compose
           docker-compose version
-      - name: Create .env file con los secretos
+      - name: Run tests with inline env
         run: |
-          echo "WANDB_API_KEY=${{ secrets.WANDB_API_KEY }}" >> ./project/src/.env
-          echo "WANDB_ARTIFACT_PATH=${{ vars.WANDB_ARTIFACT_PATH }}" >> ./project/src/.env
-      - name: Run tests
-        run: |
-          docker-compose -f ./project/src/docker-compose.yml --env-file ./project/src/.env up --abort-on-container-exit test
+          WANDB_API_KEY="${{ secrets.WANDB_API_KEY }}" \
+          WANDB_ARTIFACT_PATH="${{ vars.WANDB_ARTIFACT_PATH }}" \
+          docker-compose -f ./project/src/docker-compose.yml up --abort-on-container-exit test
       - name: Show logs if API container failed
         if: failure()
         run: |
