@@ -110,8 +110,8 @@ jobs:
       deploy-needed: ${{ steps.set.outputs.deploy }}
     steps:
       - id: set
+        # Si cualquiera de las dos imágenes se ha build (output "true"), desplegamos.
         run: |
-          # Si cualquiera de las dos imágenes se ha build (output "true"), desplegamos.
           if [[ "${{ needs.build-api.outputs.built }}" == "true" || "${{ needs.build-web.outputs.built }}" == "true" ]]; then
             echo "deploy=true" >> $GITHUB_OUTPUT
           else
