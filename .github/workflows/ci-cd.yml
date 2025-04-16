@@ -116,6 +116,7 @@ jobs:
             echo "deploy=true" >> $GITHUB_OUTPUT
           else
             echo "deploy=false" >> $GITHUB_OUTPUT
+          fi
 
   deploy:
     runs-on: ubuntu-latest
