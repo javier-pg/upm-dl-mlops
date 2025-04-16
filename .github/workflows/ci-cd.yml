@@ -79,8 +79,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [build-api, build-web]
-    if: |
-      needs.build-api.result == 'success' || needs.build-web.result == 'success'
+    if: needs.build-api.result == 'success' || needs.build-web.result == 'success'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
