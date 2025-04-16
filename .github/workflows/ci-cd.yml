@@ -13,7 +13,6 @@ jobs:
       web: ${{ steps.filter.outputs.web }}
     steps:
       - uses: actions/checkout@v3
-
       - name: Detect changes
         id: filter
         uses: dorny/paths-filter@v3
@@ -29,13 +28,11 @@ jobs:
     needs: detect-changes
     steps:
       - uses: actions/checkout@v3
-
       - name: Install docker-compose
         run: |
           curl -SL https://github.com/docker/compose/releases/download/v2.24.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
           chmod +x /usr/local/bin/docker-compose
           docker-compose version
-
       - name: Run tests
         run: |
           WANDB_API_KEY="${{ secrets.WANDB_API_KEY }}" \
@@ -46,6 +43,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test, detect-changes]
     if: needs.detect-changes.outputs.api == 'true'
+    outputs:
+      built: ${{ steps.set_output.outputs.built }}
     steps:
       - uses: actions/checkout@v3
       - name: Azure Login
@@ -58,11 +57,16 @@ jobs:
         run: |
           docker build -t ${{ vars.AZURE_ACR_NAME }}.azurecr.io/house-price-mlops:ci ./project/src/api
           docker push ${{ vars.AZURE_ACR_NAME }}.azurecr.io/house-price-mlops:ci
+      - name: Set output
+        id: set_output
+        run: echo "built=true" >> $GITHUB_OUTPUT
 
   build-web:
     runs-on: ubuntu-latest
     needs: [test, detect-changes]
     if: needs.detect-changes.outputs.web == 'true'
+    outputs:
+      built: ${{ steps.set_output.outputs.built }}
     steps:
       - uses: actions/checkout@v3
       - name: Azure Login
@@ -75,11 +79,28 @@ jobs:
         run: |
           docker build -t ${{ vars.AZURE_ACR_NAME }}.azurecr.io/web-house-price-mlops:ci ./project/src/frontend
           docker push ${{ vars.AZURE_ACR_NAME }}.azurecr.io/web-house-price-mlops:ci
+      - name: Set output
+        id: set_output
+        run: echo "built=true" >> $GITHUB_OUTPUT
+
+  check-deploy:
+    runs-on: ubuntu-latest
+    needs: [build-api, build-web]
+    outputs:
+      deploy-needed: ${{ steps.set.outputs.deploy }}
+    steps:
+      - id: set
+        run: |
+          if [[ "${{ needs.build-api.outputs.built }}" == "true" || "${{ needs.build-web.outputs.built }}" == "true" ]]; then
+            echo "deploy=true" >> $GITHUB_OUTPUT
+          else
+            echo "deploy=false" >> $GITHUB_OUTPUT
+          fi
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [build-api, build-web]
-    if: needs.build-api.result == 'success' || needs.build-web.result == 'success'
+    needs: check-deploy
+    if: needs.check-deploy.outputs.deploy-needed == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
