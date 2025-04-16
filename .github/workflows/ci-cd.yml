@@ -42,68 +42,85 @@ jobs:
   build-api:
     runs-on: ubuntu-latest
     needs: [test, detect-changes]
-    if: needs.detect-changes.outputs.api == 'true'
+    outputs:
+      built: ${{ steps.set_output.outputs.built }}
     steps:
       - uses: actions/checkout@v3
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Docker login to ACR
         run: az acr login --name ${{ vars.AZURE_ACR_NAME }}
+
+      # Aquí construimos la imagen solo si hubo cambios en API
       - name: Build & push API image
+        if: ${{ needs.detect-changes.outputs.api == 'true' }}
         run: |
           docker build -t ${{ vars.AZURE_ACR_NAME }}.azurecr.io/house-price-mlops:ci ./project/src/api
           docker push ${{ vars.AZURE_ACR_NAME }}.azurecr.io/house-price-mlops:ci
 
+      - name: Set output
+        id: set_output
+        run: |
+          if [ "${{ needs.detect-changes.outputs.api }}" = "true" ]; then
+            echo "built=true" >> $GITHUB_OUTPUT
+          else
+            echo "built=false" >> $GITHUB_OUTPUT
+          fi
+
   build-web:
     runs-on: ubuntu-latest
     needs: [test, detect-changes]
-    if: needs.detect-changes.outputs.web == 'true'
+    outputs:
+      built: ${{ steps.set_output.outputs.built }}
     steps:
       - uses: actions/checkout@v3
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Docker login to ACR
         run: az acr login --name ${{ vars.AZURE_ACR_NAME }}
+
+      # Aquí construimos la imagen solo si hubo cambios en Web
       - name: Build & push Web image
+        if: ${{ needs.detect-changes.outputs.web == 'true' }}
         run: |
           docker build -t ${{ vars.AZURE_ACR_NAME }}.azurecr.io/web-house-price-mlops:ci ./project/src/frontend
           docker push ${{ vars.AZURE_ACR_NAME }}.azurecr.io/web-house-price-mlops:ci
 
+      - name: Set output
+        id: set_output
+        run: |
+          if [ "${{ needs.detect-changes.outputs.web }}" = "true" ]; then
+            echo "built=true" >> $GITHUB_OUTPUT
+          else
+            echo "built=false" >> $GITHUB_OUTPUT
+          fi
+
   check-deploy:
     runs-on: ubuntu-latest
-    needs: [detect-changes, build-api, build-web]
+    needs: [build-api, build-web]
+    # Le decimos que corra "siempre" aunque alguno se haya saltado.
+    if: ${{ always() }}
     outputs:
       deploy-needed: ${{ steps.set.outputs.deploy }}
     steps:
       - id: set
         run: |
-          echo "build_api=${{ needs.build-api.result }}" >> $GITHUB_ENV
-          echo "build_web=${{ needs.build-web.result }}" >> $GITHUB_ENV
-
-          api_ready=false
-          web_ready=false
-
-          if [[ "${{ needs.detect-changes.outputs.api }}" == "true" && "${{ needs.build-api.result }}" == "success" ]]; then
-            api_ready=true
-          fi
-
-          if [[ "${{ needs.detect-changes.outputs.web }}" == "true" && "${{ needs.build-web.result }}" == "success" ]]; then
-            web_ready=true
-          fi
-
-          if [[ "$api_ready" == "true" || "$web_ready" == "true" ]]; then
+          # Si cualquiera de las dos imágenes se ha build (output "true"), desplegamos.
+          if [[ "${{ needs.build-api.outputs.built }}" == "true" || "${{ needs.build-web.outputs.built }}" == "true" ]]; then
             echo "deploy=true" >> $GITHUB_OUTPUT
           else
             echo "deploy=false" >> $GITHUB_OUTPUT
-          fi
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [check-deploy]
+    needs: check-deploy
+    # Verificamos la salida "deploy-needed"
     if: needs.check-deploy.outputs.deploy-needed == 'true'
     steps:
       - name: Checkout repository
