@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  api:
+    image: ${AZURE_ACR_NAME}.azurecr.io/house-price-mlops:ci
+    ports:
+      - "8000:8000"
+    environment:
+      - API_PORT=8000
+      - WANDB_API_KEY=${WANDB_API_KEY}
+      - WANDB_ARTIFACT_PATH=${WANDB_ARTIFACT_PATH}
+
+  web:
+    image: ${AZURE_ACR_NAME}.azurecr.io/web-house-price-mlops:ci
+    ports:
+      - "8080:8080"
+    depends_on:
+      api:
+        condition: service_started
+    environment:
+      - WEB_APP_PORT=8080
+      - API_HOST=api
+      - API_PORT=8000
