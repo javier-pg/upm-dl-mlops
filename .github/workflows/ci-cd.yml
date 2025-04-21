@@ -75,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-api, build-web]
     # se dispara sólo si al menos uno de los builds terminó en success
-    if: ${{ needs.build-api.result == 'success' || needs.build-web.result == 'success' }}
+    if: ${{ always() && (needs.build-api.result == 'success' || needs.build-web.result == 'success') }}
     steps:
       - uses: actions/checkout@v3
       - uses: azure/login@v1
