@@ -1,4 +1,5 @@
 name: CI‑CD–Test, Build & Deploy to Azure
+
 on:
   push:
     branches: [master]
@@ -40,7 +41,7 @@ jobs:
   build-api:
     runs-on: ubuntu-latest
     needs: [test, detect-changes]
-    if: ${{ needs.detect-changes.outputs.api == 'true' }}   # 👈 cond. a nivel de job
+    if: ${{ needs.detect-changes.outputs.api == 'true' }}
     steps:
       - uses: actions/checkout@v3
       - uses: azure/login@v1
@@ -74,7 +75,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [build-api, build-web]
-    # se dispara sólo si al menos uno de los builds terminó en success
     if: ${{ always() && (needs.build-api.result == 'success' || needs.build-web.result == 'success') }}
     steps:
       - uses: actions/checkout@v3

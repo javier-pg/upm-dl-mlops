@@ -34,8 +34,8 @@ Este repositorio contiene el material para el curso **Operacionalización de Mac
 | **3**    | Empaquetamiento y Contenedorización                       | Empaquetamiento; Docker; Docker-Compose; Azure Apps | [Diapositivas](./slides/MLOps-Tema3-EmpaquetamientoYContenedorización.pdf) |
 | **4**    | Seguimiento de experimentos con W&B        |         Visión general, ejecuciones, espacio de trabajo, proyectos                | [Diapositivas](./slides/part4.pdf) | 
 | **5**    | Ajuste de hiperparámetros con barridos de W&B        |         Visión general de barridos, espacio de búsqueda, agente                | [Diapositivas](./slides/part5.pdf) |
-
-
+| **6**    | Artefactos de W&B        |         Artefactos, Versionado, Monitoreo                | [Diapositivas](./slides/part6.pdf) |
+| **7**    | Integración y Despliegue Continuo        |         CI/CD, GitHub Actions, Azure Apps                | [Diapositivas](./slides/MLOps-Tema7-IntegraciónYDespliegueContinuo.pdf)|
 [Volver al índice](#índice)  | [Inicio](#)
 
 ---
@@ -60,7 +60,8 @@ This repository contains the material for the course **"Machine Learning Operati
 | **3**    | Packaging and Containerization                       | Packaging; Docker; Docker-Compose; Azure Apps | [Slides](./slides/MLOps-Tema3-EmpaquetamientoYContenedorización.pdf) |
 | **4**    | Experiment tracking with W&B        |         Overview, runs, workspace, projects                | [Slides](./slides/part4.pdf) | 
 | **5**    | Hyperparameter tuning with W&B sweeps        |         Sweep overivew, search space, agent                | [Slides](./slides/part5.pdf) |
-
+| **6**    | W&B Artifacts        |         Artifacts, Versioning, Tracking                | [Slides](./slides/part6.pdf) |
+| **7**    | Continuous Integration and Deployment        |         CI/CD, GitHub Actions, Azure Apps                | [Slides](./slides/MLOps-Tema7-IntegraciónYDespliegueContinuo.pdf)|
 [Back to Index](#index)   | [Top](#)
 
 
